@@ -120,7 +120,14 @@ namespace MapEditor
             images[i].BackColor = Color.Transparent;
             images[i].Parent = pictureBox1;
             images[i].Location = new Point(x, (y - images[i].Height));
-            images[i].BringToFront();
+            if(type < 2)
+            {
+                images[i].SendToBack();
+            }
+            else
+            {
+                images[i].BringToFront();
+            }
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
