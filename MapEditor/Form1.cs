@@ -43,6 +43,8 @@ namespace MapEditor
             pictureBox3.Parent = pictureBox1;
             pictureBox3.Location = new Point(x - 2, y - pictureBox3.Image.Height + 2);
 
+            FormClosing += new FormClosingEventHandler(closeButton_Click);
+
             // allowing preview to scroll vertically and horizontally
             panel1.AutoScroll = true;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -86,12 +88,6 @@ namespace MapEditor
                 {
                     newImage.Image = zombieTwo.Image;
                     newImage.ClientSize = zombieTwo.Image.Size;
-                    break;
-                }
-                case 5:
-                {
-                    newImage.Image = extraButton.Image;
-                    newImage.ClientSize = extraButton.Image.Size;
                     break;
                 }
             }
@@ -201,14 +197,49 @@ namespace MapEditor
 
         private void extraButton_Click(object sender, EventArgs e)
         {
-            // setting type
-            type = 5;
-            typeBox.Text = type.ToString();
+
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void closeButton_Click(object sender, FormClosingEventArgs e)
+        {
+            DialogResult save = MessageBox.Show("Would you like to save your work?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            if (save == DialogResult.Yes)
+            {
+                // opening save dialog
+                if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
+                {
+                    if (saveFileDialog1.FileName == null)
+                    {
+                        Close();
+                    }
+
+                    bWStream = File.OpenWrite(saveFileDialog1.FileName); // now saving file with user's input file name
+                    bWStream.SetLength(0);
+                    bW = new BinaryWriter(bWStream);
+                    bW.Write(width);
+                    for (int i = 0; i < images.Count; i++)
+                    {
+                        bW.Write(types[i]);
+                        bW.Write(images[i].Location.X);
+                        bW.Write(images[i].Location.Y);
+                    }
+                    bW.Close();
+                }
+                e.Cancel = false;
+            }
+            else if (save == DialogResult.No)
+            {
+                e.Cancel = false;
+            }
+            else if(save == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -284,13 +315,6 @@ namespace MapEditor
                         {
                             images[i].Image = zombieTwo.Image;
                             images[i].ClientSize = zombieTwo.Image.Size;
-                            images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
-                            break;
-                        }
-                        case 5:
-                        {
-                            images[i].Image = extraButton.Image;
-                            images[i].ClientSize = extraButton.Image.Size;
                             images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
                             break;
                         }

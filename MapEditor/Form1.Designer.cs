@@ -52,7 +52,6 @@
             this.player = new System.Windows.Forms.Button();
             this.ZombieOne = new System.Windows.Forms.Button();
             this.zombieTwo = new System.Windows.Forms.Button();
-            this.extraButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -275,17 +274,6 @@
             this.zombieTwo.UseVisualStyleBackColor = true;
             this.zombieTwo.Click += new System.EventHandler(this.zombieTwo_Click);
             // 
-            // extraButton
-            // 
-            this.extraButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.extraButton.Location = new System.Drawing.Point(860, 279);
-            this.extraButton.Name = "extraButton";
-            this.extraButton.Size = new System.Drawing.Size(67, 69);
-            this.extraButton.TabIndex = 18;
-            this.extraButton.Text = "Crash Button";
-            this.extraButton.UseVisualStyleBackColor = true;
-            this.extraButton.Click += new System.EventHandler(this.extraButton_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -325,7 +313,6 @@
             this.Controls.Add(this.typeBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.extraButton);
             this.Controls.Add(this.zombieTwo);
             this.Controls.Add(this.ZombieOne);
             this.Controls.Add(this.player);
@@ -378,7 +365,6 @@
         private System.Windows.Forms.Button player;
         private System.Windows.Forms.Button ZombieOne;
         private System.Windows.Forms.Button zombieTwo;
-        private System.Windows.Forms.Button extraButton;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
