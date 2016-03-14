@@ -22,6 +22,7 @@ namespace MapEditor
         private List<PictureBox> images;
         private List<int> types;
         private int x, y, width;
+        bool changed;
 
         // Mouse States
         bool mouseDown = false;
@@ -39,6 +40,7 @@ namespace MapEditor
             textBox3.Text = y.ToString();
             width = 800;
             textBox2.Text = width.ToString();
+            changed = false;
 
             pictureBox3.Parent = pictureBox1;
             pictureBox3.Location = new Point(x - 2, y - pictureBox3.Image.Height + 2);
@@ -124,6 +126,7 @@ namespace MapEditor
             {
                 images[i].BringToFront();
             }
+            changed = true;
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
@@ -158,7 +161,8 @@ namespace MapEditor
                     bW.Write(images[i].Location.Y);
                 }
                 bW.Close();
-            }       
+                changed = false;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -207,38 +211,41 @@ namespace MapEditor
 
         private void closeButton_Click(object sender, FormClosingEventArgs e)
         {
-            DialogResult save = MessageBox.Show("Would you like to save your work?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-            if (save == DialogResult.Yes)
+            if (changed)
             {
-                // opening save dialog
-                if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
+                DialogResult save = MessageBox.Show("Would you like to save your work?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                if (save == DialogResult.Yes)
                 {
-                    if (saveFileDialog1.FileName == null)
+                    // opening save dialog
+                    if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
                     {
-                        Close();
-                    }
+                        if (saveFileDialog1.FileName == null)
+                        {
+                            Close();
+                        }
 
-                    bWStream = File.OpenWrite(saveFileDialog1.FileName); // now saving file with user's input file name
-                    bWStream.SetLength(0);
-                    bW = new BinaryWriter(bWStream);
-                    bW.Write(width);
-                    for (int i = 0; i < images.Count; i++)
-                    {
-                        bW.Write(types[i]);
-                        bW.Write(images[i].Location.X);
-                        bW.Write(images[i].Location.Y);
+                        bWStream = File.OpenWrite(saveFileDialog1.FileName); // now saving file with user's input file name
+                        bWStream.SetLength(0);
+                        bW = new BinaryWriter(bWStream);
+                        bW.Write(width);
+                        for (int i = 0; i < images.Count; i++)
+                        {
+                            bW.Write(types[i]);
+                            bW.Write(images[i].Location.X);
+                            bW.Write(images[i].Location.Y);
+                        }
+                        bW.Close();
                     }
-                    bW.Close();
+                    e.Cancel = false;
                 }
-                e.Cancel = false;
-            }
-            else if (save == DialogResult.No)
-            {
-                e.Cancel = false;
-            }
-            else if(save == DialogResult.Cancel)
-            {
-                e.Cancel = true;
+                else if (save == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+                else if (save == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -255,88 +262,161 @@ namespace MapEditor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool cancel = false;
             // opening open dialog
-            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+            if (changed)
             {
-                if (openFileDialog1.FileName == null)
+                DialogResult save = MessageBox.Show("Would you like to save your work?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                if (save == DialogResult.Yes)
                 {
-                    Close();
-                }
+                    // opening save dialog
+                    if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
+                    {
+                        if (saveFileDialog1.FileName == null)
+                        {
+                            Close();
+                        }
 
+                        bWStream = File.OpenWrite(saveFileDialog1.FileName); // now saving file with user's input file name
+                        bWStream.SetLength(0);
+                        bW = new BinaryWriter(bWStream);
+                        bW.Write(width);
+                        for (int i = 0; i < images.Count; i++)
+                        {
+                            bW.Write(types[i]);
+                            bW.Write(images[i].Location.X);
+                            bW.Write(images[i].Location.Y);
+                        }
+                        bW.Close();
+                    }
+                }
+                else if (save == DialogResult.Cancel)
+                {
+                    cancel = true;
+                }
+            }
+            if (!cancel)
+            {
+                if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+                {
+                    if (openFileDialog1.FileName == null)
+                    {
+                        Close();
+                    }
+
+                    for (int i = 0; i < images.Count; i++)
+                    {
+                        images[i].Dispose();
+                    }
+                    images.Clear();
+                    types.Clear();
+                    bRStream = File.OpenRead(openFileDialog1.FileName); // now loading file with user's input file name
+                    bR = new BinaryReader(bRStream);
+                    width = bR.ReadInt32();
+                    pictureBox1.ClientSize = new Size(width * 2, pictureBox1.ClientSize.Height);
+                    textBox2.Text = width.ToString();
+                    for (int i = 0; bRStream.Position < bRStream.Length; i++)
+                    {
+                        types.Add(bR.ReadInt32());
+                        images.Add(new PictureBox());
+                        images[i].Name = i.ToString();
+                        images[i].BackColor = Color.Transparent;
+                        images[i].Parent = pictureBox1;
+                        switch (types[i])
+                        {
+                            case 0:
+                                {
+                                    images[i].Image = buildingOne.Image;
+                                    images[i].ClientSize = buildingOne.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    images[i].Image = buildingTwo.Image;
+                                    images[i].ClientSize = buildingTwo.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    images[i].Image = player.Image;
+                                    images[i].ClientSize = player.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    images[i].Image = ZombieOne.Image;
+                                    images[i].ClientSize = ZombieOne.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    images[i].Image = zombieTwo.Image;
+                                    images[i].ClientSize = zombieTwo.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                        }
+                        images[i].MouseDown += new MouseEventHandler(images_MouseDown);
+                        images[i].MouseUp += new MouseEventHandler(images_MouseUp);
+                        images[i].MouseMove += new MouseEventHandler(images_MouseMove);
+                        images[i].KeyDown += new KeyEventHandler(images_KeyDown);
+                        images[i].BringToFront();
+                    }
+                    bR.Close();
+                    changed = false;
+                }
+            }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool cancel = false;
+            // opening open dialog
+            if (changed)
+            {
+                DialogResult save = MessageBox.Show("Would you like to save your work?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                if (save == DialogResult.Yes)
+                {
+                    // opening save dialog
+                    if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
+                    {
+                        if (saveFileDialog1.FileName == null)
+                        {
+                            Close();
+                        }
+
+                        bWStream = File.OpenWrite(saveFileDialog1.FileName); // now saving file with user's input file name
+                        bWStream.SetLength(0);
+                        bW = new BinaryWriter(bWStream);
+                        bW.Write(width);
+                        for (int i = 0; i < images.Count; i++)
+                        {
+                            bW.Write(types[i]);
+                            bW.Write(images[i].Location.X);
+                            bW.Write(images[i].Location.Y);
+                        }
+                        bW.Close();
+                    }
+                }
+                else if (save == DialogResult.Cancel)
+                {
+                    cancel = true;
+                }
+            }
+            if (!cancel)
+            {
                 for (int i = 0; i < images.Count; i++)
                 {
                     images[i].Dispose();
                 }
                 images.Clear();
                 types.Clear();
-                bRStream = File.OpenRead(openFileDialog1.FileName); // now loading file with user's input file name
-                bR = new BinaryReader(bRStream);
-                width = bR.ReadInt32();
-                pictureBox1.ClientSize = new Size(width * 2, pictureBox1.ClientSize.Height);
-                textBox2.Text = width.ToString();
-                for (int i = 0; bRStream.Position < bRStream.Length; i++)
-                {
-                    types.Add(bR.ReadInt32());
-                    images.Add(new PictureBox());
-                    images[i].Name = i.ToString();
-                    images[i].BackColor = Color.Transparent;
-                    images[i].Parent = pictureBox1;
-                    switch (types[i])
-                    {
-                        case 0:
-                        {
-                            images[i].Image = buildingOne.Image;
-                            images[i].ClientSize = buildingOne.Image.Size;
-                            images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
-                            break;
-                        }
-                        case 1:
-                        {
-                            images[i].Image = buildingTwo.Image;
-                            images[i].ClientSize = buildingTwo.Image.Size;
-                            images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
-                            break;
-                        }
-                        case 2:
-                        {
-                            images[i].Image = player.Image;
-                            images[i].ClientSize = player.Image.Size;
-                            images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
-                            break;
-                        }
-                        case 3:
-                        {
-                            images[i].Image = ZombieOne.Image;
-                            images[i].ClientSize = ZombieOne.Image.Size;
-                            images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
-                            break;
-                        }
-                        case 4:
-                        {
-                            images[i].Image = zombieTwo.Image;
-                            images[i].ClientSize = zombieTwo.Image.Size;
-                            images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
-                            break;
-                        }
-                    }
-                    images[i].MouseDown += new MouseEventHandler(images_MouseDown);
-                    images[i].MouseUp += new MouseEventHandler(images_MouseUp);
-                    images[i].MouseMove += new MouseEventHandler(images_MouseMove);
-                    images[i].KeyDown += new KeyEventHandler(images_KeyDown);
-                    images[i].BringToFront();
-                }
-                bR.Close();
+                changed = false;
             }
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < images.Count; i++)
-            {
-                images[i].Dispose();
-            }
-            images.Clear();
-            types.Clear();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -345,6 +425,7 @@ namespace MapEditor
             if (width != 0)
             {
                 pictureBox1.ClientSize = new Size(width * 2, pictureBox1.ClientSize.Height);
+                changed = true;
             }
         }
 
@@ -366,6 +447,7 @@ namespace MapEditor
             Point newPosition = new Point(PointToClient(MousePosition).X - panel1.Location.X, PointToClient(MousePosition).Y - panel1.Location.Y);
             picBox.Focus();
             pictureBox3.Location = new Point(newPosition.X - 2, newPosition.Y - pictureBox3.ClientSize.Height + 2);
+            changed = true;
         }
 
         private void images_MouseUp(object sender, MouseEventArgs e)
@@ -404,6 +486,7 @@ namespace MapEditor
                 {
                     images[i].Name = i.ToString();
                 }
+                changed = true;
             }
         }
     }
