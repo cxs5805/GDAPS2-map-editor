@@ -156,9 +156,14 @@ namespace MapEditor
                 bW.Write(width);
                 for(int i = 0; i < images.Count; i++)
                 {
-                    bW.Write(types[i]);
-                    bW.Write(images[i].Location.X);
-                    bW.Write(images[i].Location.Y);
+                    // If the data is completely outside of the level, it's useless and unreachable; don't bother saving it.
+                    // If the type doesn't exist, then it's corrupt; get rid of it
+                    if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                    {
+                        bW.Write(types[i]);
+                        bW.Write(images[i].Location.X);
+                        bW.Write(images[i].Location.Y);
+                    }
                 }
                 bW.Close();
                 changed = false;
@@ -230,9 +235,12 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            bW.Write(types[i]);
-                            bW.Write(images[i].Location.X);
-                            bW.Write(images[i].Location.Y);
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                            {
+                                bW.Write(types[i]);
+                                bW.Write(images[i].Location.X);
+                                bW.Write(images[i].Location.Y);
+                            }
                         }
                         bW.Close();
                     }
@@ -283,9 +291,12 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            bW.Write(types[i]);
-                            bW.Write(images[i].Location.X);
-                            bW.Write(images[i].Location.Y);
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                            {
+                                bW.Write(types[i]);
+                                bW.Write(images[i].Location.X);
+                                bW.Write(images[i].Location.Y);
+                            }
                         }
                         bW.Close();
                     }
@@ -395,9 +406,12 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            bW.Write(types[i]);
-                            bW.Write(images[i].Location.X);
-                            bW.Write(images[i].Location.Y);
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                            {
+                                bW.Write(types[i]);
+                                bW.Write(images[i].Location.X);
+                                bW.Write(images[i].Location.Y);
+                            }
                         }
                         bW.Close();
                     }
