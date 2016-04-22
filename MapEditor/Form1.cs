@@ -158,7 +158,7 @@ namespace MapEditor
                 {
                     // If the data is completely outside of the level, it's useless and unreachable; don't bother saving it.
                     // If the type doesn't exist, then it's corrupt; get rid of it
-                    if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                    if (images[i].Location.X / 2 < width && (images[i].Location.X + images[i].Width) / 2 > 0 && (images[i].Location.Y + images[i].Height) / 2 > 0 && images[i].Location.Y / 2 < 450 && types[i] >= 0 && types[i] <= 4)
                     {
                         bW.Write(types[i]);
                         bW.Write(images[i].Location.X);
