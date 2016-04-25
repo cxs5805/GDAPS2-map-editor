@@ -92,6 +92,30 @@ namespace MapEditor
                     newImage.ClientSize = zombieTwo.Image.Size;
                     break;
                 }
+                case 5:
+                {
+                    newImage.Image = buildingThree.Image;
+                    newImage.ClientSize = buildingThree.Image.Size;
+                    break;
+                }
+                case 6:
+                {
+                    newImage.Image = buildingFour.Image;
+                    newImage.ClientSize = buildingFour.Image.Size;
+                    break;
+                }
+                case 7:
+                {
+                    newImage.Image = buildingFive.Image;
+                    newImage.ClientSize = buildingFive.Image.Size;
+                    break;
+                }
+                case 8:
+                {
+                    newImage.Image = buildingSix.Image;
+                    newImage.ClientSize = buildingSix.Image.Size;
+                    break;
+                }
             }
 
             // adding the current image to the list of images
@@ -118,7 +142,7 @@ namespace MapEditor
             images[i].BackColor = Color.Transparent;
             images[i].Parent = pictureBox1;
             images[i].Location = new Point(x, (y - images[i].Height));
-            if(type < 2)
+            if(type < 2 || type > 4)
             {
                 images[i].SendToBack();
             }
@@ -158,7 +182,7 @@ namespace MapEditor
                 {
                     // If the data is completely outside of the level, it's useless and unreachable; don't bother saving it.
                     // If the type doesn't exist, then it's corrupt; get rid of it
-                    if (images[i].Location.X / 2 < width && (images[i].Location.X + images[i].Width) / 2 > 0 && (images[i].Location.Y + images[i].Height) / 2 > 0 && images[i].Location.Y / 2 < 450 && types[i] >= 0 && types[i] <= 4)
+                    if (images[i].Location.X / 2 < width && (images[i].Location.X + images[i].Width) / 2 > 0 && (images[i].Location.Y + images[i].Height) / 2 > 0 && images[i].Location.Y / 2 < 450 && types[i] >= 0 && types[i] <= 8)
                     {
                         bW.Write(types[i]);
                         bW.Write(images[i].Location.X);
@@ -204,10 +228,29 @@ namespace MapEditor
             typeBox.Text = type.ToString();
         }
 
-        private void extraButton_Click(object sender, EventArgs e)
+        private void buildingThree_Click(object sender, EventArgs e)
         {
-
+            type = 5;
+            typeBox.Text = type.ToString();
         }
+
+        private void buildingFour_Click(object sender, EventArgs e)
+        {
+            type = 6;
+            typeBox.Text = type.ToString();
+        }
+        private void buildingFive_Click(object sender, EventArgs e)
+        {
+            type = 7;
+            typeBox.Text = type.ToString();
+        }
+
+        private void buildingSix_Click(object sender, EventArgs e)
+        {
+            type = 8;
+            typeBox.Text = type.ToString();
+        }
+
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -235,7 +278,7 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 8)
                             {
                                 bW.Write(types[i]);
                                 bW.Write(images[i].Location.X);
@@ -291,7 +334,7 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 8)
                             {
                                 bW.Write(types[i]);
                                 bW.Write(images[i].Location.X);
@@ -370,6 +413,34 @@ namespace MapEditor
                                     images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
                                     break;
                                 }
+                            case 5:
+                                {
+                                    images[i].Image = buildingThree.Image;
+                                    images[i].ClientSize = buildingThree.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 6:
+                                {
+                                    images[i].Image = buildingFour.Image;
+                                    images[i].ClientSize = buildingFour.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 7:
+                                {
+                                    images[i].Image = buildingFive.Image;
+                                    images[i].ClientSize = buildingFive.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
+                            case 8:
+                                {
+                                    images[i].Image = buildingSix.Image;
+                                    images[i].ClientSize = buildingSix.Image.Size;
+                                    images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                    break;
+                                }
                         }
                         images[i].MouseDown += new MouseEventHandler(images_MouseDown);
                         images[i].MouseUp += new MouseEventHandler(images_MouseUp);
@@ -406,7 +477,7 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 4)
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 8)
                             {
                                 bW.Write(types[i]);
                                 bW.Write(images[i].Location.X);
@@ -468,6 +539,12 @@ namespace MapEditor
         {
             mouseDown = false;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void images_MouseMove(object sender, MouseEventArgs e)
         {

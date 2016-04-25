@@ -56,11 +56,17 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.typeBox = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.buildingThree = new System.Windows.Forms.Button();
+            this.buildingFour = new System.Windows.Forms.Button();
+            this.buildingFive = new System.Windows.Forms.Button();
+            this.buildingSix = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -177,9 +183,9 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.NavajoWhite;
-            this.pictureBox2.Location = new System.Drawing.Point(737, 62);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(223, 355);
+            this.pictureBox2.Size = new System.Drawing.Size(220, 519);
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
             // 
@@ -187,7 +193,7 @@
             // 
             this.buildingOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buildingOne.Image = ((System.Drawing.Image)(resources.GetObject("buildingOne.Image")));
-            this.buildingOne.Location = new System.Drawing.Point(764, 80);
+            this.buildingOne.Location = new System.Drawing.Point(27, 18);
             this.buildingOne.Name = "buildingOne";
             this.buildingOne.Size = new System.Drawing.Size(67, 69);
             this.buildingOne.TabIndex = 12;
@@ -234,7 +240,7 @@
             // 
             this.buildingTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buildingTwo.Image = ((System.Drawing.Image)(resources.GetObject("buildingTwo.Image")));
-            this.buildingTwo.Location = new System.Drawing.Point(860, 80);
+            this.buildingTwo.Location = new System.Drawing.Point(123, 18);
             this.buildingTwo.Name = "buildingTwo";
             this.buildingTwo.Size = new System.Drawing.Size(67, 69);
             this.buildingTwo.TabIndex = 14;
@@ -245,7 +251,7 @@
             // 
             this.player.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.player.Image = ((System.Drawing.Image)(resources.GetObject("player.Image")));
-            this.player.Location = new System.Drawing.Point(764, 180);
+            this.player.Location = new System.Drawing.Point(27, 118);
             this.player.Name = "player";
             this.player.Size = new System.Drawing.Size(67, 69);
             this.player.TabIndex = 15;
@@ -256,7 +262,7 @@
             // 
             this.ZombieOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ZombieOne.Image = ((System.Drawing.Image)(resources.GetObject("ZombieOne.Image")));
-            this.ZombieOne.Location = new System.Drawing.Point(860, 180);
+            this.ZombieOne.Location = new System.Drawing.Point(123, 118);
             this.ZombieOne.Name = "ZombieOne";
             this.ZombieOne.Size = new System.Drawing.Size(67, 69);
             this.ZombieOne.TabIndex = 16;
@@ -267,7 +273,7 @@
             // 
             this.zombieTwo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.zombieTwo.Image = ((System.Drawing.Image)(resources.GetObject("zombieTwo.Image")));
-            this.zombieTwo.Location = new System.Drawing.Point(764, 279);
+            this.zombieTwo.Location = new System.Drawing.Point(27, 217);
             this.zombieTwo.Name = "zombieTwo";
             this.zombieTwo.Size = new System.Drawing.Size(67, 69);
             this.zombieTwo.TabIndex = 17;
@@ -305,6 +311,69 @@
             this.typeBox.Text = "0";
             this.typeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.buildingSix);
+            this.panel2.Controls.Add(this.buildingFive);
+            this.panel2.Controls.Add(this.buildingFour);
+            this.panel2.Controls.Add(this.buildingThree);
+            this.panel2.Controls.Add(this.buildingOne);
+            this.panel2.Controls.Add(this.buildingTwo);
+            this.panel2.Controls.Add(this.player);
+            this.panel2.Controls.Add(this.zombieTwo);
+            this.panel2.Controls.Add(this.ZombieOne);
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Location = new System.Drawing.Point(737, 62);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(237, 341);
+            this.panel2.TabIndex = 22;
+            // 
+            // buildingThree
+            // 
+            this.buildingThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingThree.Image = ((System.Drawing.Image)(resources.GetObject("buildingThree.Image")));
+            this.buildingThree.Location = new System.Drawing.Point(123, 217);
+            this.buildingThree.Name = "buildingThree";
+            this.buildingThree.Size = new System.Drawing.Size(67, 69);
+            this.buildingThree.TabIndex = 18;
+            this.buildingThree.UseVisualStyleBackColor = true;
+            this.buildingThree.Click += new System.EventHandler(this.buildingThree_Click);
+            // 
+            // buildingFour
+            // 
+            this.buildingFour.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingFour.Image = ((System.Drawing.Image)(resources.GetObject("buildingFour.Image")));
+            this.buildingFour.Location = new System.Drawing.Point(27, 316);
+            this.buildingFour.Name = "buildingFour";
+            this.buildingFour.Size = new System.Drawing.Size(67, 69);
+            this.buildingFour.TabIndex = 19;
+            this.buildingFour.UseVisualStyleBackColor = true;
+            this.buildingFour.Click += new System.EventHandler(this.buildingFour_Click);
+            // 
+            // buildingFive
+            // 
+            this.buildingFive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingFive.Image = ((System.Drawing.Image)(resources.GetObject("buildingFive.Image")));
+            this.buildingFive.Location = new System.Drawing.Point(123, 316);
+            this.buildingFive.Name = "buildingFive";
+            this.buildingFive.Size = new System.Drawing.Size(67, 69);
+            this.buildingFive.TabIndex = 20;
+            this.buildingFive.UseVisualStyleBackColor = true;
+            this.buildingFive.Click += new System.EventHandler(this.buildingFive_Click);
+            // 
+            // buildingSix
+            // 
+            this.buildingSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingSix.Image = ((System.Drawing.Image)(resources.GetObject("buildingSix.Image")));
+            this.buildingSix.Location = new System.Drawing.Point(27, 417);
+            this.buildingSix.Name = "buildingSix";
+            this.buildingSix.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buildingSix.Size = new System.Drawing.Size(67, 69);
+            this.buildingSix.TabIndex = 21;
+            this.buildingSix.UseVisualStyleBackColor = true;
+            this.buildingSix.Click += new System.EventHandler(this.buildingSix_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,13 +382,7 @@
             this.Controls.Add(this.typeBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.zombieTwo);
-            this.Controls.Add(this.ZombieOne);
-            this.Controls.Add(this.player);
-            this.Controls.Add(this.buildingTwo);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.buildingOne);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
@@ -328,10 +391,12 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Map Editor";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -339,6 +404,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -372,6 +438,11 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox typeBox;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button buildingThree;
+        private System.Windows.Forms.Button buildingFour;
+        private System.Windows.Forms.Button buildingSix;
+        private System.Windows.Forms.Button buildingFive;
     }
 }
 
