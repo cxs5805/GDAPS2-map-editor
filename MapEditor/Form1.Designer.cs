@@ -57,10 +57,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.typeBox = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buildingThree = new System.Windows.Forms.Button();
-            this.buildingFour = new System.Windows.Forms.Button();
-            this.buildingFive = new System.Windows.Forms.Button();
             this.buildingSix = new System.Windows.Forms.Button();
+            this.buildingFive = new System.Windows.Forms.Button();
+            this.buildingFour = new System.Windows.Forms.Button();
+            this.buildingThree = new System.Windows.Forms.Button();
+            this.bossZombie = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -314,6 +315,7 @@
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.bossZombie);
             this.panel2.Controls.Add(this.buildingSix);
             this.panel2.Controls.Add(this.buildingFive);
             this.panel2.Controls.Add(this.buildingFour);
@@ -329,27 +331,17 @@
             this.panel2.Size = new System.Drawing.Size(237, 341);
             this.panel2.TabIndex = 22;
             // 
-            // buildingThree
+            // buildingSix
             // 
-            this.buildingThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buildingThree.Image = ((System.Drawing.Image)(resources.GetObject("buildingThree.Image")));
-            this.buildingThree.Location = new System.Drawing.Point(123, 217);
-            this.buildingThree.Name = "buildingThree";
-            this.buildingThree.Size = new System.Drawing.Size(67, 69);
-            this.buildingThree.TabIndex = 18;
-            this.buildingThree.UseVisualStyleBackColor = true;
-            this.buildingThree.Click += new System.EventHandler(this.buildingThree_Click);
-            // 
-            // buildingFour
-            // 
-            this.buildingFour.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buildingFour.Image = ((System.Drawing.Image)(resources.GetObject("buildingFour.Image")));
-            this.buildingFour.Location = new System.Drawing.Point(27, 316);
-            this.buildingFour.Name = "buildingFour";
-            this.buildingFour.Size = new System.Drawing.Size(67, 69);
-            this.buildingFour.TabIndex = 19;
-            this.buildingFour.UseVisualStyleBackColor = true;
-            this.buildingFour.Click += new System.EventHandler(this.buildingFour_Click);
+            this.buildingSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingSix.Image = ((System.Drawing.Image)(resources.GetObject("buildingSix.Image")));
+            this.buildingSix.Location = new System.Drawing.Point(27, 417);
+            this.buildingSix.Name = "buildingSix";
+            this.buildingSix.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buildingSix.Size = new System.Drawing.Size(67, 69);
+            this.buildingSix.TabIndex = 21;
+            this.buildingSix.UseVisualStyleBackColor = true;
+            this.buildingSix.Click += new System.EventHandler(this.buildingSix_Click);
             // 
             // buildingFive
             // 
@@ -362,17 +354,37 @@
             this.buildingFive.UseVisualStyleBackColor = true;
             this.buildingFive.Click += new System.EventHandler(this.buildingFive_Click);
             // 
-            // buildingSix
+            // buildingFour
             // 
-            this.buildingSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buildingSix.Image = ((System.Drawing.Image)(resources.GetObject("buildingSix.Image")));
-            this.buildingSix.Location = new System.Drawing.Point(27, 417);
-            this.buildingSix.Name = "buildingSix";
-            this.buildingSix.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buildingSix.Size = new System.Drawing.Size(67, 69);
-            this.buildingSix.TabIndex = 21;
-            this.buildingSix.UseVisualStyleBackColor = true;
-            this.buildingSix.Click += new System.EventHandler(this.buildingSix_Click);
+            this.buildingFour.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingFour.Image = ((System.Drawing.Image)(resources.GetObject("buildingFour.Image")));
+            this.buildingFour.Location = new System.Drawing.Point(27, 316);
+            this.buildingFour.Name = "buildingFour";
+            this.buildingFour.Size = new System.Drawing.Size(67, 69);
+            this.buildingFour.TabIndex = 19;
+            this.buildingFour.UseVisualStyleBackColor = true;
+            this.buildingFour.Click += new System.EventHandler(this.buildingFour_Click);
+            // 
+            // buildingThree
+            // 
+            this.buildingThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buildingThree.Image = ((System.Drawing.Image)(resources.GetObject("buildingThree.Image")));
+            this.buildingThree.Location = new System.Drawing.Point(123, 217);
+            this.buildingThree.Name = "buildingThree";
+            this.buildingThree.Size = new System.Drawing.Size(67, 69);
+            this.buildingThree.TabIndex = 18;
+            this.buildingThree.UseVisualStyleBackColor = true;
+            this.buildingThree.Click += new System.EventHandler(this.buildingThree_Click);
+            // 
+            // bossZombie
+            // 
+            this.bossZombie.Image = ((System.Drawing.Image)(resources.GetObject("bossZombie.Image")));
+            this.bossZombie.Location = new System.Drawing.Point(123, 417);
+            this.bossZombie.Name = "bossZombie";
+            this.bossZombie.Size = new System.Drawing.Size(67, 69);
+            this.bossZombie.TabIndex = 22;
+            this.bossZombie.UseVisualStyleBackColor = true;
+            this.bossZombie.Click += new System.EventHandler(this.bossZombie_Click);
             // 
             // Form1
             // 
@@ -443,6 +455,7 @@
         private System.Windows.Forms.Button buildingFour;
         private System.Windows.Forms.Button buildingSix;
         private System.Windows.Forms.Button buildingFive;
+        private System.Windows.Forms.Button bossZombie;
     }
 }
 

@@ -116,6 +116,12 @@ namespace MapEditor
                     newImage.ClientSize = buildingSix.Image.Size;
                     break;
                 }
+                case 9:
+                {
+                    newImage.Image = bossZombie.Image;
+                    newImage.ClientSize = bossZombie.Image.Size;
+                    break;
+                }
             }
 
             // adding the current image to the list of images
@@ -142,7 +148,7 @@ namespace MapEditor
             images[i].BackColor = Color.Transparent;
             images[i].Parent = pictureBox1;
             images[i].Location = new Point(x, (y - images[i].Height));
-            if(type < 2 || type > 4)
+            if(type < 2 || type > 4 && type != 9)
             {
                 images[i].SendToBack();
             }
@@ -182,7 +188,7 @@ namespace MapEditor
                 {
                     // If the data is completely outside of the level, it's useless and unreachable; don't bother saving it.
                     // If the type doesn't exist, then it's corrupt; get rid of it
-                    if (images[i].Location.X / 2 < width && (images[i].Location.X + images[i].Width) / 2 > 0 && (images[i].Location.Y + images[i].Height) / 2 > 0 && images[i].Location.Y / 2 < 450 && types[i] >= 0 && types[i] <= 8)
+                    if (images[i].Location.X / 2 < width && (images[i].Location.X + images[i].Width) / 2 > 0 && (images[i].Location.Y + images[i].Height) / 2 > 0 && images[i].Location.Y / 2 < 450 && types[i] >= 0 && types[i] <= 9)
                     {
                         bW.Write(types[i]);
                         bW.Write(images[i].Location.X);
@@ -250,6 +256,12 @@ namespace MapEditor
             type = 8;
             typeBox.Text = type.ToString();
         }
+        private void bossZombie_Click(object sender, EventArgs e)
+        {
+            type = 9;
+            typeBox.Text = type.ToString();
+        }
+
 
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,7 +290,7 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 8)
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 9)
                             {
                                 bW.Write(types[i]);
                                 bW.Write(images[i].Location.X);
@@ -334,7 +346,7 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 8)
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 9)
                             {
                                 bW.Write(types[i]);
                                 bW.Write(images[i].Location.X);
@@ -441,6 +453,13 @@ namespace MapEditor
                                     images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
                                     break;
                                 }
+                            case 9:
+                            {
+                                images[i].Image = bossZombie.Image;
+                                images[i].ClientSize = bossZombie.Image.Size;
+                                images[i].Location = new Point(bR.ReadInt32(), bR.ReadInt32());
+                                break;
+                            }
                         }
                         images[i].MouseDown += new MouseEventHandler(images_MouseDown);
                         images[i].MouseUp += new MouseEventHandler(images_MouseUp);
@@ -477,7 +496,7 @@ namespace MapEditor
                         bW.Write(width);
                         for (int i = 0; i < images.Count; i++)
                         {
-                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 8)
+                            if (images[i].Location.X < width && images[i].Location.X + images[i].Width > 0 && images[i].Location.Y + images[i].Height > 0 && images[i].Location.Y < 450 && types[i] >= 0 && types[i] <= 9)
                             {
                                 bW.Write(types[i]);
                                 bW.Write(images[i].Location.X);
@@ -544,7 +563,6 @@ namespace MapEditor
         {
 
         }
-
 
         private void images_MouseMove(object sender, MouseEventArgs e)
         {
