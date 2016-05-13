@@ -57,11 +57,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.typeBox = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.bossZombie = new System.Windows.Forms.Button();
             this.buildingSix = new System.Windows.Forms.Button();
             this.buildingFive = new System.Windows.Forms.Button();
             this.buildingFour = new System.Windows.Forms.Button();
             this.buildingThree = new System.Windows.Forms.Button();
-            this.bossZombie = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -331,6 +331,16 @@
             this.panel2.Size = new System.Drawing.Size(237, 341);
             this.panel2.TabIndex = 22;
             // 
+            // bossZombie
+            // 
+            this.bossZombie.Image = ((System.Drawing.Image)(resources.GetObject("bossZombie.Image")));
+            this.bossZombie.Location = new System.Drawing.Point(123, 417);
+            this.bossZombie.Name = "bossZombie";
+            this.bossZombie.Size = new System.Drawing.Size(67, 69);
+            this.bossZombie.TabIndex = 22;
+            this.bossZombie.UseVisualStyleBackColor = true;
+            this.bossZombie.Click += new System.EventHandler(this.bossZombie_Click);
+            // 
             // buildingSix
             // 
             this.buildingSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -375,16 +385,6 @@
             this.buildingThree.TabIndex = 18;
             this.buildingThree.UseVisualStyleBackColor = true;
             this.buildingThree.Click += new System.EventHandler(this.buildingThree_Click);
-            // 
-            // bossZombie
-            // 
-            this.bossZombie.Image = ((System.Drawing.Image)(resources.GetObject("bossZombie.Image")));
-            this.bossZombie.Location = new System.Drawing.Point(123, 417);
-            this.bossZombie.Name = "bossZombie";
-            this.bossZombie.Size = new System.Drawing.Size(67, 69);
-            this.bossZombie.TabIndex = 22;
-            this.bossZombie.UseVisualStyleBackColor = true;
-            this.bossZombie.Click += new System.EventHandler(this.bossZombie_Click);
             // 
             // Form1
             // 
